@@ -1,0 +1,25 @@
+class Solution(object):
+    def furthestBuilding(self, heights, bricks, ladders):
+        """
+        :type heights: List[int]
+        :type bricks: int
+        :type ladders: int
+        :rtype: int
+        """
+        import heapq
+        farther_flag = 0
+        min_heap = []
+        
+        for i in range(len(heights) - 1):
+            height_difference = heights[i+1] - heights[i]
+            if height_difference > 0:
+                heapq.heappush(min_heap, height_difference)
+                if len(min_heap) > ladders:
+                    bricks -= heapq.heappop(min_heap)
+                if bricks < 0:
+                    return farther_flag
+                farther_flag += 1
+            else:
+                farther_flag += 1
+                
+        return farther_flag

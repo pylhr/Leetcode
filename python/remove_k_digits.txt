@@ -1,0 +1,23 @@
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
+        if len(num) == k:
+            return '0'
+
+        result = []
+        stack = []
+
+        for j, digit in enumerate(num):
+            while k > 0 and stack and stack[-1] > digit:
+                stack.pop()
+                k -= 1
+            stack.append(digit)
+
+        for i in range(k):
+            stack.pop()
+
+        for y in stack:
+            if y == '0' and not result:
+                continue
+            result.append(y)
+
+        return ''.join(result) if result else '0'

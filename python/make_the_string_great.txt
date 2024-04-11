@@ -1,0 +1,13 @@
+class Solution:
+    def maxDepth(self, s: str) -> int:
+        answer = 0
+        opened_brc = 0
+
+        for i in s :
+            if i == '(':
+                opened_brc += 1
+                answer = max(answer, opened_brc)
+            elif i == ')':
+                opened_brc -=1
+
+        return answer
